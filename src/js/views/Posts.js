@@ -44,7 +44,7 @@ export const Posts = () =>{
 
     return (
 <>
-        <h1 className= "text-primary"> Todos </h1>
+        <h1 className= "text-primary"> Post </h1>
 <hr></hr>
     {errores ? <p>{errores}</p> :
 

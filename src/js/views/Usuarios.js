@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
@@ -8,12 +9,17 @@ import "../../styles/demo.css";
 
 
 export const Usuarios = () => {
-    const [users, setUsers] = useState([]);
+    // const [users, setUsers] = useState([]);
     const [errores, setErrores] = useState("");
     const host = "https://jsonplaceholder.typicode.com/";
+    const [ users, setUsers] = useState([]);
 
+    
     const getUsers = async  () => {
-        console.log(host);
+     
+    if (localStorage.getItem("usersLocal") !== null) {
+      setUsers(JSON.parse(localStorage.getItem("usersLocal")))
+    }else {   
 
         const response = await fetch ("https://jsonplaceholder.typicode.com/users")
           console.log(response);
@@ -21,11 +27,14 @@ export const Usuarios = () => {
             const data = await response.json()
             console.log(data);
             setUsers(data);
+            localStorage.setItem("usersLocal", JSON.stringify(data))
 
         }  else {
             console.log("error: ", response.status, response.statusText);
             setErrores("error: " + response.status + " " + response.statusText);
-        }
+            setUsers(JSON.parse(localStorage.getItem("usersLocal")))       
+           }
+    }
 
     }
 
