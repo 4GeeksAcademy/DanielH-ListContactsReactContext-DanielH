@@ -45,45 +45,47 @@ export const Usuarios = () => {
    
 
     return (
-  <>
-    <h1 className= "text-primary"> Nombres de Usuarios</h1>
-<hr></hr>
-    {errores ? <p>{errores}</p> :
-
-    <div className="card" style={{ width: "18rem" }} >
-        { users.map( (user, index) => { 
-            return <> <div className="card-body" key={index}>
-              <img src="https://xsgames.co/randomusers/assets/avatars/pixel/35.jpg" className="card-img-top" alt={user.id}></img>  
-              <h5 className="card-title"> <strong>{user.id}</strong> {user.name}</h5>
-              <p className="card-text">Comapañia: {user.company.name}</p>
-              <p className="card-text">Website: {user.website}</p>
-              <Link to={"/usuarios/" + index}>
-              <button  className="btn btn-primary">Ir a algún lugar</button>
-              </Link>
+      <div className="container">
+        <h1 className="text-primary">Nombres de Usuarios</h1>
+        <hr></hr>
+        {!users ? (
+          "Leyendo Datos"
+        ) : (
+          users.map((user, index) => (
+            <div className="card mb-3">
+              <div className="row g-0">
+                <div className="col-md-2 text-center">
+                  <img
+                    src="https://xsgames.co/randomusers/assets/avatars/pixel/35.jpg"
+                    className="card-img-top"
+                    alt={user.id}
+                  />
+                </div>
+                <div className="col-md-7">
+                  <div className="card-body">
+                    <h5 className="card-title">
+                      <strong>{user.id}</strong> {user.name}
+                    </h5>
+                    <p className="card-subtitle">Compañía: {user.company.name}</p>
+                    <p className="card-subtitle">Website: {user.website}</p>
+                    <p className="cart-subtitle">Telefono: {user.phone} </p>
+                  </div>
+                  <div className="col-md-3 text-end">
+                    <div className="card-body me-3">
+                      <Link to={`/usuarios/${user.id}`}>
+                        <button className="btn btn-primary">Saber más</button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr></hr>
             </div>
-            <hr></hr>
-            </>
-        })}
-       
-    </div> 
-    }
-    <hr></hr>
-    
-   </>
-
-    )
+          ))
+        )}
+        
+      </div>
+    );
+  };
 
 
-
-
-}
-
-/* <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title" key="{index}"> <strong>{user.id}</strong> {User.Name}</h5>
-    <p class="card-text">{user.company.name}</p>
-    <p class="card-text">Website{user.website}</p>
-    <a href="#" class="btn btn-primary">Ir a algún lugar</a>
-  </div>
-</div> */
